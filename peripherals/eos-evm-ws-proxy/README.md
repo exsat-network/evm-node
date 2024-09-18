@@ -4,8 +4,8 @@
 
 1. **Clone the Repository**
    ```
-   git clone https://github.com/eosnetworkfoundation/eos-evm-node
-   cd eos-evm-node/peripherals/eos-evm-ws-proxy
+   git clone https://github.com/eosnetworkfoundation/exsat-evm-node
+   cd exsat-evm-node/peripherals/eos-evm-ws-proxy
    ```
 
 2. **Install Dependencies**
@@ -34,7 +34,7 @@ node main.js
 
 The following environment variables are available for configuration in the `.env` file:
 
-- `WEB3_RPC_ENDPOINT`: The endpoint for the eos-evm-rpc
+- `WEB3_RPC_ENDPOINT`: The endpoint for the exsat-evm-rpc
 - `NODEOS_RPC_ENDPOINT`: The endpoint for the nodeos RPC
 - `POLL_INTERVAL`: The interval (in milliseconds) at which the blockchain is polled
 - `WS_LISTENING_PORT`: The port on which the WebSocket server listens

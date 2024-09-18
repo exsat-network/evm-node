@@ -287,9 +287,9 @@ jobs:
       - name: Extract EOS EVM Node builddir
         id: evm-node-build
         run: |
-          mkdir eos-evm-node
-          mv build.tar.gz eos-evm-node/
-          pushd eos-evm-node
+          mkdir exsat-evm-node
+          mv build.tar.gz exsat-evm-node/
+          pushd exsat-evm-node
           tar xvf build.tar.gz
           pushd build
           echo "EVM_NODE_BUILD=$(pwd)" >> "$GITHUB_OUTPUT"
@@ -332,8 +332,8 @@ jobs:
           echo "=== current directory is $(pwd)==="
           apt-get install psmisc
           killall -9 nodeos || true
-          killall -9 eos-evm-node || true
-          killall -9 eos-evm-rpc || true
+          killall -9 exsat-evm-node || true
+          killall -9 exsat-evm-rpc || true
           sleep 1.0
           mkdir -p ws_test_run_root
           cd ws_test_run_root
@@ -358,8 +358,8 @@ jobs:
           echo "=== current directory is $(pwd)==="
           apt-get install psmisc
           killall -9 nodeos || true
-          killall -9 eos-evm-node || true
-          killall -9 eos-evm-rpc || true
+          killall -9 exsat-evm-node || true
+          killall -9 exsat-evm-rpc || true
           sleep 1.0
           mkdir -p ws_test_run_root
           cd ws_test_run_root
@@ -384,8 +384,8 @@ jobs:
           echo "=== current directory is $(pwd)==="
           apt-get install psmisc
           killall -9 nodeos || true
-          killall -9 eos-evm-node || true
-          killall -9 eos-evm-rpc || true
+          killall -9 exsat-evm-node || true
+          killall -9 exsat-evm-rpc || true
           sleep 1.0
           mkdir -p ws_test_run_root
           cd ws_test_run_root

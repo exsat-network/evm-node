@@ -42,7 +42,7 @@ from antelope_name import convert_name_to_value
 #
 # --eos-evm-contract-root should point to root of EOS EVM Contract build dir
 # --genesis-json file to save generated EVM genesis json
-# --read-endpoint eos-evm-rpc endpoint (read endpoint)
+# --read-endpoint exsat-evm-rpc endpoint (read endpoint)
 #
 # Example:
 #  cd ~/ext/leap/build
@@ -67,7 +67,7 @@ appArgs=AppArgs()
 appArgs.add(flag="--eos-evm-contract-root", type=str, help="EOS EVM Contract build dir", default=None)
 appArgs.add(flag="--eos-evm-bridge-contracts-root", type=str, help="EOS EVM Bridge contracts build dir", default=None)
 appArgs.add(flag="--genesis-json", type=str, help="File to save generated genesis json", default="eos-evm-genesis.json")
-appArgs.add(flag="--read-endpoint", type=str, help="EVM read endpoint (eos-evm-rpc)", default="http://localhost:8881")
+appArgs.add(flag="--read-endpoint", type=str, help="EVM read endpoint (exsat-evm-rpc)", default="http://localhost:8881")
 appArgs.add(flag="--use-eos-vm-oc", type=bool, help="EOS EVM Contract build dir", default=False)
 
 args=TestHelper.parse_args({"--keep-logs","--dump-error-details","-v","--leave-running" }, applicationSpecificArgs=appArgs)
@@ -413,8 +413,8 @@ try:
     Utils.Print("Generated EVM json genesis file in: %s" % gensisJson)
     Utils.Print("")
     Utils.Print("You can now run:")
-    Utils.Print("  eos-evm-node --plugin=blockchain_plugin --ship-endpoint=127.0.0.1:8999 --genesis-json=%s --chain-data=/tmp --verbosity=4" % gensisJson)
-    Utils.Print("  eos-evm-rpc --eos-evm-node=127.0.0.1:8080 --http-port=0.0.0.0:8881 --chaindata=/tmp --api-spec=eth,debug,net,trace")
+    Utils.Print("  exsat-evm-node --plugin=blockchain_plugin --ship-endpoint=127.0.0.1:8999 --genesis-json=%s --chain-data=/tmp --verbosity=4" % gensisJson)
+    Utils.Print("  exsat-evm-rpc --exsat-evm-node=127.0.0.1:8080 --http-port=0.0.0.0:8881 --chaindata=/tmp --api-spec=eth,debug,net,trace")
     Utils.Print("")
     Utils.Print("Web3 endpoint:")
     Utils.Print("  http://localhost:5000")

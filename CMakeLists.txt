@@ -14,7 +14,7 @@ set(CMAKE_TOOLCHAIN_FILE
 )
 endif()
 
-project(eos-evm-node)
+project(exsat-evm-node)
 
 include(cmake/conan.cmake)
 

@@ -20,13 +20,13 @@ cmake -DCMAKE_BUILD_TYPE=Release -DWITH_LOGTIME=ON ..
 make -j4
 ```
 
-### Build eos-evm-node and eos-evm-rpc
+### Build exsat-evm-node and exsat-evm-rpc
 ```
 cd ~/evmperf/eos-evm
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
-make -j4 eos-evm-node eos-evm-rpc
+make -j4 exsat-evm-node exsat-evm-rpc
 ```
 
 
@@ -66,17 +66,17 @@ cd ..
 
 (_wait until nodeos_eos_evm_server start listening at localhost:5000_)
 
-### Launch eos-evm-node
+### Launch exsat-evm-node
 ```
 cd ~/evmperf/eos-evm/build/bin
 rm -rf chaindata etl-temp config-dir
-./eos-evm-node --plugin=blockchain_plugin --ship-endpoint=127.0.0.1:8999 --genesis-json=$HOME/evmperf/leap/build/eos-evm-genesis.json --verbosity=4
+./exsat-evm-node --plugin=blockchain_plugin --ship-endpoint=127.0.0.1:8999 --genesis-json=$HOME/evmperf/leap/build/eos-evm-genesis.json --verbosity=4
 ```
 
-### Launch eos-evm-rpc
+### Launch exsat-evm-rpc
 ```
 cd ~/evmperf/eos-evm/build/bin
-./eos-evm-rpc --eos-evm-node=127.0.0.1:8080 --http-port=0.0.0.0:8881 --chaindata=./ --api-spec=eth,debug,net,trace --verbosity=4
+./exsat-evm-rpc --exsat-evm-node=127.0.0.1:8080 --http-port=0.0.0.0:8881 --chaindata=./ --api-spec=eth,debug,net,trace --verbosity=4
 ```
 
 ### Install scripts dependencies

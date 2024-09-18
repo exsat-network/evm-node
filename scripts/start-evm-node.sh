@@ -18,13 +18,13 @@ fi
 
 mkdir -p data-evm-node/snapshots
 
-if [ ! -f $EVM_NODE_ROOT/build/src/eos-evm-node ]; then
-  echo $EVM_NODE_ROOT/build/src/eos-evm-node not found
+if [ ! -f $EVM_NODE_ROOT/build/src/exsat-evm-node ]; then
+  echo $EVM_NODE_ROOT/build/src/exsat-evm-node not found
   exit 1
 fi
 
-if [ ! -f $EVM_NODE_ROOT/build/src/eos-evm-rpc ]; then
-  echo $EVM_NODE_ROOT/build/src/eos-evm-rpc not found
+if [ ! -f $EVM_NODE_ROOT/build/src/exsat-evm-rpc ]; then
+  echo $EVM_NODE_ROOT/build/src/exsat-evm-rpc not found
   exit 1
 fi
 
@@ -41,7 +41,7 @@ if [ ! -f eos-evm-genesis.json ]; then
 fi
 
 echo "Launching EOS EVM Node"
-$EVM_NODE_ROOT/build/src/eos-evm-node \
+$EVM_NODE_ROOT/build/src/exsat-evm-node \
   --plugin=blockchain_plugin \
   --ship-endpoint=127.0.0.1:8999 \
   --genesis-json=eos-evm-genesis.json \
@@ -56,8 +56,8 @@ $EVM_NODE_ROOT/build/src/eos-evm-node \
 sleep 2
 
 echo "Launching EOS EVM Rpc"
-$EVM_NODE_ROOT/build/src/eos-evm-rpc \
-  --eos-evm-node=127.0.0.1:8080 \
+$EVM_NODE_ROOT/build/src/exsat-evm-rpc \
+  --exsat-evm-node=127.0.0.1:8080 \
   --http-port=0.0.0.0:8881 \
   --chaindata=data-evm-node \
   --stdout=1 \

@@ -49,7 +49,7 @@ from antelope_name import convert_name_to_value
 # --eos-evm-contract-root should point to root of EOS EVM contract build dir
 #
 #  cd build/tests
-# ./nodeos_eos_evm_ws_test_fork.py --eos-evm-contract-root ~/workspaces/TrustEVM/build --eos-evm-build-root ~/workspaces/eos-evm-node/build -v
+# ./nodeos_eos_evm_ws_test_fork.py --eos-evm-contract-root ~/workspaces/TrustEVM/build --eos-evm-build-root ~/workspaces/exsat-evm-node/build -v
 #
 #
 ###############################################################
@@ -585,8 +585,8 @@ try:
     Utils.Print("Generated EVM json genesis file in: %s" % genesisJson)
     Utils.Print("")
     Utils.Print("You can now run:")
-    Utils.Print("  eos-evm-node --plugin=blockchain_plugin --ship-core-account=eosio.evm --ship-endpoint=127.0.0.1:8999 --genesis-json=%s --chain-data=/tmp/data --verbosity=5" % genesisJson)
-    Utils.Print("  eos-evm-rpc --eos-evm-node=127.0.0.1:8080 --http-port=0.0.0.0:8881 --chaindata=/tmp/data --api-spec=eth,debug,net,trace")
+    Utils.Print("  exsat-evm-node --plugin=blockchain_plugin --ship-core-account=eosio.evm --ship-endpoint=127.0.0.1:8999 --genesis-json=%s --chain-data=/tmp/data --verbosity=5" % genesisJson)
+    Utils.Print("  exsat-evm-rpc --exsat-evm-node=127.0.0.1:8080 --http-port=0.0.0.0:8881 --chaindata=/tmp/data --api-spec=eth,debug,net,trace")
     Utils.Print("")
 
     #
@@ -704,27 +704,27 @@ try:
     Utils.Print("\taccount row4: ", row4)
     assert(row4["eth_address"] == "9e126c57330fa71556628e0aabd6b6b6783d99fa")
 
-    # Launch eos-evm-node
+    # Launch exsat-evm-node
     dataDir = Utils.DataDir + "eos_evm"
-    nodeStdOutDir = dataDir + "/eos-evm-node.stdout"
-    nodeStdErrDir = dataDir + "/eos-evm-node.stderr"
+    nodeStdOutDir = dataDir + "/exsat-evm-node.stdout"
+    nodeStdErrDir = dataDir + "/exsat-evm-node.stderr"
     shutil.rmtree(dataDir, ignore_errors=True)
     os.makedirs(dataDir)
     outFile = open(nodeStdOutDir, "w")
     errFile = open(nodeStdErrDir, "w")
-    cmd = f"{eosEvmBuildRoot}/bin/eos-evm-node --plugin=blockchain_plugin --ship-core-account=eosio.evm --ship-endpoint=127.0.0.1:8999 --genesis-json={genesisJson} --verbosity=5 --nocolor=1 --chain-data={dataDir}"
+    cmd = f"{eosEvmBuildRoot}/bin/exsat-evm-node --plugin=blockchain_plugin --ship-core-account=eosio.evm --ship-endpoint=127.0.0.1:8999 --genesis-json={genesisJson} --verbosity=5 --nocolor=1 --chain-data={dataDir}"
     Utils.Print(f"Launching: {cmd}")
     cmdArr=shlex.split(cmd)
     evmNodePOpen=Utils.delayedCheckOutput(cmdArr, stdout=outFile, stderr=errFile)
 
     time.sleep(4.0) # allow time to sync trxs
 
-    # Launch eos-evm-rpc
-    rpcStdOutDir = dataDir + "/eos-evm-rpc.stdout"
-    rpcStdErrDir = dataDir + "/eos-evm-rpc.stderr"
+    # Launch exsat-evm-rpc
+    rpcStdOutDir = dataDir + "/exsat-evm-rpc.stdout"
+    rpcStdErrDir = dataDir + "/exsat-evm-rpc.stderr"
     outFile = open(rpcStdOutDir, "w")
     errFile = open(rpcStdErrDir, "w")
-    cmd = f"{eosEvmBuildRoot}/bin/eos-evm-rpc --eos-evm-node=127.0.0.1:8080 --http-port=0.0.0.0:8881 --chaindata={dataDir} --api-spec=eth,debug,net,trace"
+    cmd = f"{eosEvmBuildRoot}/bin/exsat-evm-rpc --exsat-evm-node=127.0.0.1:8080 --http-port=0.0.0.0:8881 --chaindata={dataDir} --api-spec=eth,debug,net,trace"
     Utils.Print(f"Launching: {cmd}")
     cmdArr=shlex.split(cmd)
     os.environ["WEB3_RPC_ENDPOINT"] = "http://127.0.0.1:8881/"
@@ -744,7 +744,7 @@ try:
             raise
         assert r == int(row['balance'],16), f"{row['eth_address']} {r} != {int(row['balance'],16)}"
 
-    Utils.Print("checking if any error in eos-evm-node")
+    Utils.Print("checking if any error in exsat-evm-node")
     foundErr = False
     stdErrFile = open(nodeStdErrDir, "r")
     lines = stdErrFile.readlines()
@@ -753,7 +753,7 @@ try:
             Utils.Print("  Found ERROR in EOS EVM NODE log: ", line)
             foundErr = True
 
-    Utils.Print("checking if any error in eos-evm-rpc")
+    Utils.Print("checking if any error in exsat-evm-rpc")
     stdErrFile = open(rpcStdErrDir, "r")
     lines = stdErrFile.readlines()
     for line in lines:

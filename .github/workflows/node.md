@@ -1,5 +1,5 @@
 # EOS EVM Node CI
-This GitHub Actions workflow builds eos-evm-node and eos-evm-rpc.
+This GitHub Actions workflow builds exsat-evm-node and exsat-evm-rpc.
 
 ### Index
 1. [Triggers](#triggers)
@@ -30,12 +30,12 @@ This workflow performs the following steps:
 1. EOS EVM Node Build
     1. Authenticate to the `trustevm-ci-submodule-checkout` GitHub app using the [AntelopeIO/github-app-token-action](https://github.com/AntelopeIO/github-app-token-action) action to obtain an ephemeral token.
     1. Checkout the repo and submodules using the ephemeral token.
-    1. Build eos-evm-node and eos-evm-rpc using `cmake` and `make`.
+    1. Build exsat-evm-node and exsat-evm-rpc using `cmake` and `make`.
     1. Upload the build folder to GitHub Actions if the `upload-artifacts` input is set to `true`.
 
 ## Outputs
 This workflow produces the following outputs:
-1. Build Artifacts - `build.tar.gz` containing the built artifacts of eos-evm-node and eos-evm-rpc, if the `upload-artifacts` input is set to `true`.
+1. Build Artifacts - `build.tar.gz` containing the built artifacts of exsat-evm-node and exsat-evm-rpc, if the `upload-artifacts` input is set to `true`.
 
 > 💾️ Build artifacts are only attached on-demand for this pipeline because they are >117 MB each, but we only get 2 GB of cumulative artifact storage in GitHub Actions while eos-evm is a private repo. Obtain artifacts by performing a manual build with `upload-artifacts` set to `true`.
 
