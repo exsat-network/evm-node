@@ -208,7 +208,7 @@ class ship_receiver_plugin_impl : std::enable_shared_from_this<ship_receiver_plu
                   }
                   uint64_t global_sequence = 0;
                   std::visit([&](auto &receipt) {
-                     if (action_to_search == evmtx_n) {
+                     if (act.act.name == evmtx_n) {
                         uint32_t parent_act_index = act.creator_action_ordinal;
                         if (parent_act_index == 0) {
                            throw std::runtime_error("creator_action_ordinal can't be zero in evmtx");
@@ -229,6 +229,9 @@ class ship_receiver_plugin_impl : std::enable_shared_from_this<ship_receiver_plu
                         }, actions[parent_act_index]);
                         SILK_DEBUG << "add evmtx sequence " << global_sequence 
                                    << ", parent action index " << parent_act_index;
+                     } else if (act.act.name == configchange_n) {
+                        global_sequence = 0;
+                        SILK_DEBUG << "add configchange sequence " << global_sequence;
                      } else {
                         global_sequence = receipt.global_sequence;
                         SILK_DEBUG << "add pushtx sequence " << global_sequence;
